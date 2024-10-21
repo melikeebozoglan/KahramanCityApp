@@ -87,5 +87,5 @@ django
         pip install django-cleanup
         pip install djangorestframework
         pip install django-cors-headers
-
+    server çalıştırma --> python manage.py runserver 0.0.0.0:8000 
 
