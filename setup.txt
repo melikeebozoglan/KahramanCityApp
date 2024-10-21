@@ -1,0 +1,91 @@
+react native
+    set up environment
+        nodejs indir 
+            node --version
+        jdk indir
+            javac -version  11 veya 17 olmalı
+        android studio indir
+            sdk managerdan Android 14 (UpsideDownCake) seç ve aşağıdakileri indir
+                Android SDK Platform 34
+                Intel x86 Atom_64 System Image
+                Google APIs Intel x86 Atom System Image
+            sdk tooldan Android SDK Build-Tools seç ve aşağıdakileri indir (ndk yı kontrol et)
+                34.0.0 
+        ortam değişkenlerini ekle
+            ayarlar->sistem->hakkında->gelişmiş sistem ayarları->ortam değişkenleri
+            ANDROID_HOME
+                kullanıcı değişkenleri kısmına yeni ekle
+                    değişken adı ANDROID_HOME
+                    değişken yerine ise sdk nın dizinini yapıştır --> C:\Users\Melike\AppData\Local\Android\Sdk
+                kullanıcı değişkenleri kısmındaki pathi seç ve düzenleye bas
+                    platform-tools ekle --> C:\Users\Melike\AppData\Local\Android\Sdk\platform-tools
+            JAVA_HOME
+                kullanıcı değişkenleri kısmına yeni ekle
+                    değişken adı JAVA_HOME
+                    değişken yerine ise jdk nın dizinini yapıştır --> C:\Program Files\Java\jdk-17
+                sistem değişkenleri kısmındaki pathi seç ve düzenleye bas
+                    yeni ekle --> %JAVA_HOME%\bin
+    proje oluşturma
+        masaüstü dizinine gel
+        proje oluştur --> npx react-native init <projeAdı>
+        android telefonu usb ile bağla
+            hata ayıklama  modunu aç
+            geliştici modunu aç
+            adb devices ile kontrol et
+        projeAdı dizinine gel 
+        npx react-native run-android ile çalıştır
+    sonradan install edilenler
+        npm install @react-navigation/native-stack
+        npm install @react-navigation/native @react-navigation/native-stack
+        npm install react-native-screens react-native-safe-area-context
+        npm install @react-navigation/native
+        npm install react-native-keyboard-aware-scroll-view
+        npm install axios
+        npm install react-native-vector-icons /npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons - npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+       
+
+django
+    setup
+        python indir 
+            python --version
+        pip yüklü mü kontrol et (cmd'de) --> pip --version
+            python get-pip.py
+        cmd de masaüstü dizinine gel
+        klasör oluştur --> mkdir <klasör_adı>
+        oluşturduğun klasör dizinine git --> cd <klasör_adı>
+        oluşturduğun klasöre sanal ortam paketi yükle --> pip install virtualenv
+        oluşturduğun klasöre sanal ortamı kur --> virtualenv <sanal_ortam_adı> (python -m venv <sanal_ortam_adı>) 
+        oluşturduğun klasörün içine sanal ortam klasörü oluştu, onun dizinine git --> cd <sanal_ortam_adı>
+        kurduğun sanal ortamı aktifleştir --> .\Scripts\activate 
+        sanal ortamı aktifken ilk adımda oluşturduğun klasör dizinine django paketi oluştur --> pip install Django
+            kontrol et --> python -m django --version
+    proje oluşturma
+        django projesi oluştur (mkdir ile oluşturduğun klasöre) --> django-admin startproject <proje_adı>
+            <proje_adı> adında bir klasör oluşak içinde <proje_adı> adında bir tane daha klasör oluşacak
+            en dıştaki (<sanal_ortam_adı> klasörü ile aynı dizinde olan) klasör container klasörüdür
+            onun adını <proje_adı_container> olarak değiştir
+            anlaşılır olur
+        cd <proje_adı_container> ile oluşturduğun proje klasörünün bulunduğu dizine gel 
+        migrations dosyasını oluştur --> python manage.py makemigrations
+        modeli veri tabanına taşımak --> python manage.py migrate
+        superuser oluştur --> python manage.py createsuperuser
+        manage.py dosyasının olduğu dizininde server çalıştır --> python manage.py runserver
+        server çalıştır --> python manage.py runserver (manage.py dosyasının olduğu aynı dizinde)
+            ctrl+c server'ı durdurur
+        yerel (local) sunucunun adresini kopyala tarayıcıya yapıştır. sonuna </admin> yazarsan admin paneline gider
+    uygulama oluşturma
+        <proje_adı_container> dizinene kadar gel
+        uygulamalarını belirle ve uygulamaları oluştur --> python manage.py startapp <uygulama_adı>
+        uygulama, projeye kayıt edilmeli (kayıt sırası önemli)
+            settings.py dosyasında INSTALLED_APPS kısmının en altında belirt 
+                iki yolu var
+                1. '<uygulama_adı>',
+                2. '<uygulama_adı>.apps.PagesConfig',
+                    PagesConfig --> uygulamanın apps.py dosyasındaki class adıdır
+    sonradan install edilenler
+        pip install Pillow
+        pip install django-cleanup
+        pip install djangorestframework
+        pip install django-cors-headers
+
+
