@@ -1,6 +1,7 @@
-import {StyleSheet, View, Text, TextInput} from 'react-native';
+import {StyleSheet, View, Text, TextInput, Button} from 'react-native';
+import React from 'react';
 
-export default function Login() {
+export default function Login({navigation}) {
   return (
     <View style={styles.titleContainer}>
       <Text style={styles.h1}>Login</Text>
@@ -20,12 +21,12 @@ export default function Login() {
         <Text>LOGIN </Text>
       </View>
 
-      <Text style={[styles.forgotStyle, styles.textLine]}>Forgot Password</Text>
+      <Text style={[styles.forgotStyle, styles.textLine]} onPress={() => navigation.navigate("ForgotPassword")}>Forgot Password</Text>
 
       <Text>
         Don't have an account?{' '}
-        <Text style={styles.textLine}>Create an account.</Text>
-      </Text>
+        <Text title = "Create Account " style={styles.textLine} onPress = {() =>navigation.navigate("CreateNewAccount")}>Create an account.</Text></Text>
+      
     </View>
   );
 }
