@@ -15,7 +15,7 @@ import axios from 'axios';
 
 const ItemList = ({ route }) => {
   const navigation = useNavigation();
-  const { slug } = route.params;
+  const { slug, name } = route.params;
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const ItemList = ({ route }) => {
   return (
     <View style={styles.container}>
 
-      <Header pageName='aa' />
+      <Header pageName={name} />
 
       <View style={styles.flatContainer}>
         <FlatList

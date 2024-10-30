@@ -7,20 +7,20 @@ const Header = ({pageName}) => {
   const navigation = useNavigation();
   
   return (
-    <View style={styles.header}>
+    <View style={[styles.header,  {backgroundColor: pageName === 'Home' ? '#282828' : '#ede1d5'} ]}>
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Icon name="angle-left" size={30} color="black" />
+        <Icon name="angle-left" size={30} color= {pageName === 'Home' ? '#ede1d5' : 'black'} />
       </TouchableOpacity>
 
-      <Text style={styles.pageName}>{pageName}</Text>
+      <Text style={[styles.pageName, {color: pageName === 'Home' ? '#ede1d5' : 'black'}]}>{pageName}</Text>
 
       {pageName == 'Detail' ? (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
           <Icon name="heart" size={25} color="black" style={{paddingTop: 10}} />
         </TouchableOpacity>
       ) : (
           <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
-            <Icon name="bell-o" size={23} color="black" />
+            <Icon name="bell-o" size={23} color={pageName === 'Home' ? '#ede1d5' : 'black'} />
           </TouchableOpacity>
         ) && pageName == 'Notification' ? (
         <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
@@ -28,7 +28,7 @@ const Header = ({pageName}) => {
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
-          <Icon name="bell-o" size={23} color="black" />
+          <Icon name="bell-o" size={23} color={pageName === 'Home' ? '#ede1d5' : 'black'} />
         </TouchableOpacity>
       )}
     </View>
@@ -37,7 +37,8 @@ const Header = ({pageName}) => {
 
 const styles = StyleSheet.create({
   header: {
-    marginBottom: 20,
+    paddingTop:15,
+    //marginBottom: 20,
     paddingHorizontal: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',

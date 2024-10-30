@@ -29,17 +29,6 @@ export default function Home() {
       <View style={styles.firstBox}>
         <Text style={styles.h1}>Welcome to Kahramanmaraş</Text>
       </View>
-{/* 
-      <View style={styles.secondBox}>
-        <View>
-          <MainItem />
-          <MainItem />
-        </View>
-        <View>
-        <MainItem />
-        <MainItem />
-        </View>
-      </View> */}
 
       <View style={styles.secondBox}>
         <View>
@@ -47,7 +36,7 @@ export default function Home() {
           <TouchableOpacity
             key={index}  // key prop eklenmeli
             style={styles.item}
-            onPress={() => navigation.navigate('ItemList', {slug: item.slug})}>
+            onPress={() => navigation.navigate('ItemList', {slug: item.slug, name: item.name})}>
             <Text>{item.name}</Text>
           </TouchableOpacity>
         ))}
@@ -78,12 +67,13 @@ const styles = StyleSheet.create({
   firstBox: {
     backgroundColor: '#282828',
     flex: 2,
-    borderRadius: 25,
+    borderBottomLeftRadius: 25,
+    borderBottomRightRadius: 25,
   },
 
   h1: {
     fontSize: 28,
-    marginTop: 80,
+    marginTop: 50,
     marginLeft: 80,
     marginRight: 60,
 
