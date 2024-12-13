@@ -4,23 +4,44 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
-// import MainItem from '../components/MainItem';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home() {
   const navigation = useNavigation();
   const [category, setCategory] = useState([]);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios
-      .get('http://10.0.2.2:8000/items/categorys/')
-      .then(response => {
-        console.log(response.data);
-        setCategory(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the category!', error);
-      });
+    const fetchData = async () => {
+      try {
+        const token = await AsyncStorage.getItem('accessToken');
+        if (!token) {
+          setError('No token found');
+          return;
+        }
+  
+        const response = await axios.get('http://10.0.2.2:8000/account/protected-route', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setData(response.data);
+  
+        const categoryResponse = await axios.get('http://10.0.2.2:8000/items/categorys/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setCategory(categoryResponse.data);
+      } catch (err) {
+        setError(err.response?.data || 'Error fetching data');
+      }
+    };
+  
+    fetchData();
   }, []);
+
 
   return (
     <View style={styles.titleContainer}>

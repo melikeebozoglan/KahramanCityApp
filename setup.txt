@@ -42,6 +42,8 @@ react native
         npm install react-native-keyboard-aware-scroll-view
         npm install axios
         npm install react-native-vector-icons /npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons - npm install --save @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+        npm install @react-native-async-storage/async-storage
+
        
 
 django
@@ -56,7 +58,7 @@ django
         oluşturduğun klasöre sanal ortam paketi yükle --> pip install virtualenv
         oluşturduğun klasöre sanal ortamı kur --> virtualenv <sanal_ortam_adı> (python -m venv <sanal_ortam_adı>) 
         oluşturduğun klasörün içine sanal ortam klasörü oluştu, onun dizinine git --> cd <sanal_ortam_adı>
-        kurduğun sanal ortamı aktifleştir --> .\Scripts\activate 
+        kurduğun sanal ortamı aktifleştir --> ,
         sanal ortamı aktifken ilk adımda oluşturduğun klasör dizinine django paketi oluştur --> pip install Django
             kontrol et --> python -m django --version
     proje oluşturma
@@ -87,5 +89,6 @@ django
         pip install django-cleanup
         pip install djangorestframework
         pip install django-cors-headers
+        pip install djangorestframework djangorestframework-simplejwt
     server çalıştırma --> python manage.py runserver 0.0.0.0:8000 
 

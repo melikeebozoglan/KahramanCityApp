@@ -1,7 +1,35 @@
-import {StyleSheet, View, Text, TextInput, Button} from 'react-native';
-import React from 'react';
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, Alert} from 'react-native';
+import React, { useState } from 'react';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({navigation}) {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://10.0.2.2:8000/account/login/', {
+        email,
+        password,
+      });
+      const { access, refresh } = response.data;
+      setMessage('Login successful!');
+
+      await AsyncStorage.setItem('accessToken', access);
+      await AsyncStorage.setItem('refreshToken', refresh);
+
+      navigation.navigate('Home');
+      console.log('kullanıcııı', email, password)
+      // Tokenları güvenli bir şekilde sakla
+    } catch (error) {
+      setMessage('Error: ' + error.response.data.error);
+    }
+  };
+
+
   return (
     <View style={styles.titleContainer}>
       <Text style={styles.h1}>Login</Text>
@@ -10,16 +38,23 @@ export default function Login({navigation}) {
       <TextInput
         style={styles.buttonStyle}
         placeholder="email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType='email-address'
         autoCapitalize="none"></TextInput>
       <Text style={styles.h3}>Password</Text>
       <TextInput
         style={styles.buttonStyle}
-        placeholder="Password"
+        placeholder="*********"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
         autoCapitalize="none"></TextInput>
 
-      <View style={styles.loginButton}>
-        <Text>LOGIN </Text>
-      </View>
+      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+        <Text>LOGIN</Text> 
+      </TouchableOpacity>
+      <Text>{message}</Text>
 
       <Text style={[styles.forgotStyle, styles.textLine]} onPress={() => navigation.navigate("ForgotPassword")}>Forgot Password</Text>
 

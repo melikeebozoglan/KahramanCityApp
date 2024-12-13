@@ -11,6 +11,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 const ItemList = ({ route }) => {
@@ -19,18 +20,35 @@ const ItemList = ({ route }) => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    console.log('Route params:', route.params);
-    if (slug) {
-    axios
-      .get(`http://10.0.2.2:8000/items/categorys/${slug}/`)
-      .then(response => {
-        console.log(response.data);
+    const fetchItems = async () => {
+      try {
+        console.log('Route params:', route.params);
+  
+        if (!slug) {
+          console.warn('Slug is missing, skipping fetch.');
+          return;
+        }
+  
+        const token = await AsyncStorage.getItem('accessToken');
+        if (!token) {
+          console.error('No access token found!');
+          return;
+        }
+  
+        const response = await axios.get(`http://10.0.2.2:8000/items/categorys/${slug}/`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        console.log('Fetched items:', response.data);
         setItems(response.data);
-      })
-      .catch(error => {
+      } catch (error) {
         console.error('There was an error fetching the items!', error);
-      });
-    }
+      }
+    };
+  
+    fetchItems();
   }, [slug]);
 
   return (

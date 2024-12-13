@@ -28,9 +28,40 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'corsheaders',
     'items',
+    'account',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'account.backends.EmailBackend',  # Özel EmailAuthBackend
+    'django.contrib.auth.backends.ModelBackend',  # Varsayılan backend (isteğe bağlı)
+]
+
+LOGIN_URL = 'account/login/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:19006",  # React Native Expo'nun çalıştığı adres
+
+]
+
+# CSRF_COOKIE_NAME = "csrftoken"  # Django'nun CSRF çerezi adı
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://10.0.2.2:8000',  # Emülatör
+#     'http://127.0.0.1:8000',  # Lokal sunucu
+#     # 'http://localhost:8000',  # Lokal frontend
+# ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
