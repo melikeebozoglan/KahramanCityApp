@@ -92,3 +92,4 @@ django
         pip install djangorestframework djangorestframework-simplejwt
     server çalıştırma --> python manage.py runserver 0.0.0.0:8000 
 
+m.sultanbozoglan@gmail.com

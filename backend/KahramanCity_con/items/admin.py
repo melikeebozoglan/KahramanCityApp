@@ -3,7 +3,7 @@ from .models import Item, Category
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'category')
     list_display_links = ('name',)
     search_fields = ('name', 'description')
     

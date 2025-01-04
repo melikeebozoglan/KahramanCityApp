@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+   'rest_framework.authtoken',
     'items',
     'account',
 ]
@@ -41,19 +42,32 @@ AUTHENTICATION_BACKENDS = [
 
 LOGIN_URL = 'account/login/'
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+# }
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',  # Herkese erişim izni
     ),
 }
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:19006",  # React Native Expo'nun çalıştığı adres
 
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:19006",  # React Native Expo'nun çalıştığı adres
+
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 # CSRF_COOKIE_NAME = "csrftoken"  # Django'nun CSRF çerezi adı
 # CSRF_TRUSTED_ORIGINS = [
@@ -64,6 +78,7 @@ CORS_ALLOWED_ORIGINS = [
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -71,7 +86,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True 

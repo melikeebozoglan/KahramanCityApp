@@ -26,11 +26,11 @@ const App = () => {
         <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
         <Stack.Screen name="ItemList" component={ItemList}  options={{headerShown: false}} />
         <Stack.Screen name="ItemDetail" component={ItemDetail} options={{headerShown: false}} /> 
-        <Stack.Screen name="EditProfile" component={EditProfile} options={{headerShown: false}} />
+        <Stack.Screen name="EditProfile" component={EditProfile} options={{headerShown: true}} />
         <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
         <Stack.Screen name="Weather" component={Weather} options={{headerShown: false}} />
         <Stack.Screen name="Favorites" component={Favorites} options={{headerShown: false}} />
-        <Stack.Screen name="Transportation" component={Transportation} />
+        <Stack.Screen name="Transportation" component={Transportation} options={{headerShown: false}}/>
         <Stack.Screen name="Notification" component={Notification} options={{headerShown: false}} />
       </Stack.Navigator>
     </NavigationContainer>

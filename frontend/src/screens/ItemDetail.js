@@ -73,9 +73,9 @@ const styles = StyleSheet.create({
     flexShrink: 1, // Uzun metinlerin taşmasını önlemek için
   },
   image: {
-    width: 50,
-    height: 50,
-    borderRadius: 25, // Yuvarlak resimler için
+    width: 252,
+    height: 363,
+    borderRadius: 45,
   },
   description:{
     width: 254,

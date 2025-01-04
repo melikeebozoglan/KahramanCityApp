@@ -8,7 +8,7 @@ class Category(models.Model):
         return self.name
 
 class Item(models.Model):
-    name = models.CharField(max_length=200, unique=True, verbose_name="Kurs Adı", help_text="Kursun adını giriniz")
+    name = models.CharField(max_length=200, unique=True, verbose_name="Item Name", help_text="Enter item name")
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to="items/")
     latitude = models.FloatField()

@@ -8,11 +8,13 @@ const Header = ({pageName}) => {
   
   return (
     <View style={[styles.header,  {backgroundColor: pageName === 'Home' ? '#282828' : '#ede1d5'} ]}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Icon name="angle-left" size={30} color= {pageName === 'Home' ? '#ede1d5' : 'black'} />
-      </TouchableOpacity>
+      {pageName !== 'Home' && (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="angle-left" size={30} color="black" />
+        </TouchableOpacity>
+    )}
 
-      <Text style={[styles.pageName, {color: pageName === 'Home' ? '#ede1d5' : 'black'}]}>{pageName}</Text>
+      <Text style={[styles.pageName, {color: pageName === 'Home' ? '#282828' : 'black'}]}>{pageName}</Text>
 
       {pageName == 'Detail' ? (
         <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
@@ -31,6 +33,7 @@ const Header = ({pageName}) => {
           <Icon name="bell-o" size={23} color={pageName === 'Home' ? '#ede1d5' : 'black'} />
         </TouchableOpacity>
       )}
+
     </View>
   );
 };

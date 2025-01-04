@@ -42,13 +42,15 @@ export default function Home() {
     fetchData();
   }, []);
 
-
   return (
     <View style={styles.titleContainer}>
       <Header pageName="Home" />
 
       <View style={styles.firstBox}>
         <Text style={styles.h1}>Welcome to Kahramanmaraş</Text>
+        <TouchableOpacity style={styles.weather}  onPress={() => navigation.navigate('Weather')} >
+          <Text style={styles.h2}>Weather Forecast</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.secondBox}>
@@ -58,7 +60,7 @@ export default function Home() {
             key={index}  // key prop eklenmeli
             style={styles.item}
             onPress={() => navigation.navigate('ItemList', {slug: item.slug, name: item.name})}>
-            <Text>{item.name}</Text>
+            <Text style={styles.category}>{item.name}</Text>
           </TouchableOpacity>
         ))}
         </View>
@@ -68,7 +70,7 @@ export default function Home() {
             key={index}  // key prop eklenmeli
             style={styles.item}
             onPress={() => navigation.navigate('ItemList', {slug: item.slug})}>
-            <Text>{item.name}</Text>
+            <Text style={styles.category}>{item.name}</Text>
           </TouchableOpacity>
         ))}
         </View>
@@ -90,14 +92,32 @@ const styles = StyleSheet.create({
     flex: 2,
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
+    alignItems: 'center',
   },
 
   h1: {
     fontSize: 28,
-    marginTop: 50,
+    marginTop: 30,
     marginLeft: 80,
     marginRight: 60,
+    color: '#ede1d5',
+  },
 
+  h2:{
+    
+    fontSize: 18,
+    color: '#ede1d5',
+    
+
+  },
+  weather: {
+    marginTop: 25,
+    borderColor: '#ede1d5',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    padding: 8,
+  },
+  category:{
     color: '#ede1d5',
   },
 
@@ -113,5 +133,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#282828',
     borderRadius: 30,
     marginTop: 30,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
 });
