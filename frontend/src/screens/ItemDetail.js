@@ -32,9 +32,7 @@ const ItemDetail = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    //marginBottom:20,
     flex: 1,
-    //justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
     backgroundColor: '#ede1d5',
@@ -48,8 +46,6 @@ const styles = StyleSheet.create({
     width: 254,
     height: 364,
     backgroundColor: 'white',
-    //marginRight: 15,
-    //marginTop: 5,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -60,12 +56,10 @@ const styles = StyleSheet.create({
     width: 254,
     height: 50,
     backgroundColor: '#ede1d5',
-    //marginRight: 15,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 5,
     flexDirection:"row",
-    
   },
   title: {
     fontSize: 16,

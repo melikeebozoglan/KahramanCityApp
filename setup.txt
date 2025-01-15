@@ -90,6 +90,7 @@ django
         pip install djangorestframework
         pip install django-cors-headers
         pip install djangorestframework djangorestframework-simplejwt
+        pip install django-debug-toolbar
     server çalıştırma --> python manage.py runserver 0.0.0.0:8000 
 
 m.sultanbozoglan@gmail.com

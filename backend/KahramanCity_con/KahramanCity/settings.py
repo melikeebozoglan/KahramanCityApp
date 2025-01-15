@@ -31,8 +31,10 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
    'rest_framework.authtoken',
+   'debug_toolbar',
     'items',
     'account',
+    'notification',
 ]
 
 AUTHENTICATION_BACKENDS = [
