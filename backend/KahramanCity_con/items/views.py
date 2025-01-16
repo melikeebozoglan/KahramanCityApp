@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import Item, Category, Favorite
-from .serializers import ItemSerializer, CategorySerializer
+from .serializers import ItemSerializer, CategorySerializer, FavoriteSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -34,22 +34,42 @@ class ItemDetailView(generics.RetrieveAPIView):
     def get_queryset(self):
         return Item.objects.filter(slug=self.kwargs['category_slug'], pk=self.kwargs['pk'])
     
+class FavoriteListView(APIView):
+    permission_classes = [IsAuthenticated]
 
-class ToggleFavoriteView(APIView):
+    def get(self, request):
+        # Kullanıcının favorilerini listele
+        favorites = Favorite.objects.filter(user=request.user)
+        serializer = FavoriteSerializer(favorites, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class FavoriteCreateView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        item_id = request.data.get("item_id")
-        if not item_id:
-            return Response({"error": "Item ID is required."}, status=status.HTTP_400_BAD_REQUEST)
-        
+        # Favorilere öğe ekle
+        item_id = request.data.get('item_id')
         try:
             item = Item.objects.get(id=item_id)
         except Item.DoesNotExist:
-            return Response({"error": "Item not found."}, status=status.HTTP_404_NOT_FOUND)
-        
+            return Response({"error": "Item not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        # Favori oluştur veya zaten varsa hata döndür
         favorite, created = Favorite.objects.get_or_create(user=request.user, item=item)
         if not created:
+            return Response({"message": "Item is already in favorites"}, status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = FavoriteSerializer(favorite)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class FavoriteDeleteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request, item_id):
+        # Favorilerden öğe çıkar
+        try:
+            favorite = Favorite.objects.get(user=request.user, item_id=item_id)
             favorite.delete()
-            return Response({"message": "Item removed from favorites."})
-        return Response({"message": "Item added to favorites."})
+            return Response({"message": "Item removed from favorites"}, status=status.HTTP_204_NO_CONTENT)
+        except Favorite.DoesNotExist:
+            return Response({"error": "Favorite not found"}, status=status.HTTP_404_NOT_FOUND)

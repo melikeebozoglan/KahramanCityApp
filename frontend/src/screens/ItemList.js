@@ -65,7 +65,7 @@ const ItemList = ({ route }) => {
             <View>
               <TouchableOpacity
                 style={styles.box}
-                onPress={() => navigation.navigate('ItemDetail', {image: item.image, name: item.name, description: item.description})}>
+                onPress={() => navigation.navigate('ItemDetail', {image: item.image, name: item.name, description: item.description, itemId: item.id})}>
                 <Image
                   source={{uri: item.image}}
                   style={styles.image}
@@ -75,7 +75,7 @@ const ItemList = ({ route }) => {
 
               <TouchableOpacity
                 style={styles.titleBox}
-                onPress={() => navigation.navigate('ItemDetail', {item})}>
+                onPress={() => navigation.navigate('ItemDetail', {image: item.image, name: item.name, description: item.description})}>
                 <Icon
                   name="map-marker"
                   size={15}

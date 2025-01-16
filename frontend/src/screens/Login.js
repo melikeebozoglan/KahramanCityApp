@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   h1: {
-    fontFamily: 'Poppins',
     marginTop: 100,
     fontSize: 31.2,
     fontWeight: 'bold',
@@ -84,7 +83,6 @@ const styles = StyleSheet.create({
   },
   h3: {
     fontSize: 11,
-    fontFamily: 'Poppins-Regular',
     marginRight: 190,
   },
   buttonStyle: {
@@ -104,11 +102,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: 'black',
     borderWidth: 3,
-    paddingLeft: 30,
     fontSize: 13.7,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingEnd: 20,
     marginTop: 20,
   },
 

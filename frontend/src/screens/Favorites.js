@@ -13,19 +13,39 @@ import Footer from '../components/Footer';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Favorites = () => {
   const navigation = useNavigation();
 
-  const items = [
-    {
-        id: 1,
-        name: 'Beautiful Beach',
-        image: 'https://example.com/beach.jpg',
-        description: 'A beautiful beach with golden sand and clear waters.'
-      },
-  ]
+  const [favorites, setFavorites] = useState([]);
+  const baseUrl = 'http://10.0.2.2:8000';
 
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      const token = await AsyncStorage.getItem('accessToken');
+        if (!token) {
+          console.error('No access token found!');
+          return;
+        }
+
+      const url = 'http://10.0.2.2:8000/items/favorites/';
+      
+
+      try {
+        const response = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        console.log('Response data:', response.data);
+        setFavorites(response.data);
+      } catch (error) {
+        console.error('Error fetching favorites:', error.response?.data || error.message);
+      }
+    };
+    
+
+    fetchFavorites();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -35,15 +55,15 @@ const Favorites = () => {
       <View style={styles.flatContainer}>
         <FlatList
           horizontal
-          data={items}
+          data={favorites}
           keyExtractor={item => item.id.toString()}
           renderItem={({item}) => (
             <View>
               <TouchableOpacity
                 style={styles.box}
-                onPress={() => navigation.navigate('ItemDetail', {image: item.image, name: item.name, description: item.description})}>
+                onPress={() => navigation.navigate('ItemDetail', {image: `${baseUrl}${item.item_details.image}`, name: item.item_details.name, description: item.item_details.description, itemId: item.id, isFavorite: true,})}>
                 <Image
-                  source={{uri: item.image}}
+                  source={{uri: `${baseUrl}${item.item_details.image}`}}
                   style={styles.image}
                   resizeMode="cover"
                 />
@@ -51,14 +71,14 @@ const Favorites = () => {
 
               <TouchableOpacity
                 style={styles.titleBox}
-                onPress={() => navigation.navigate('ItemDetail', {item})}>
+                onPress={() => navigation.navigate('ItemDetail', {image: `${baseUrl}${item.item_details.image}`, name: item.item_details.name, description: item.item_details.description, itemId: item.id, isFavorite: true,})}>
                 <Icon
                   name="map-marker"
                   size={15}
                   color="black"
                   style={{paddingTop: 2, paddingRight: 5}}
                 />
-                <Text>{item.name}</Text>
+                <Text>{item.item_details.name}</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -124,9 +144,9 @@ const styles = StyleSheet.create({
     flexShrink: 1, // Uzun metinlerin taşmasını önlemek için
   },
   image: {
-    width: 50,
-    height: 50,
-    borderRadius: 25, // Yuvarlak resimler için
+    width: 252,
+    height: 363,
+    borderRadius: 45,
   },
 });
 

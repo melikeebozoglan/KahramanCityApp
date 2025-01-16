@@ -16,15 +16,7 @@ const Header = ({pageName}) => {
 
       <Text style={[styles.pageName, {color: pageName === 'Home' ? '#282828' : 'black'}]}>{pageName}</Text>
 
-      {pageName == 'Detail' ? (
-        <TouchableOpacity onPress={() => navigation.navigate('Favorites')}>
-          <Icon name="heart" size={25} color="black" style={{paddingTop: 10}} />
-        </TouchableOpacity>
-      ) : (
-          <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
-            <Icon name="bell-o" size={23} color={pageName === 'Home' ? '#ede1d5' : 'black'} />
-          </TouchableOpacity>
-        ) && pageName == 'Notification' ? (
+      {pageName == 'Notification' ? (
         <TouchableOpacity onPress={() => navigation.navigate('Notification')}>
           <Icon name="bell" size={23} color="black" />
         </TouchableOpacity>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item, Category
+from .models import Item, Category, Favorite
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
@@ -12,3 +12,6 @@ class ItemAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
+@admin.register(Favorite)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('user', 'item',)

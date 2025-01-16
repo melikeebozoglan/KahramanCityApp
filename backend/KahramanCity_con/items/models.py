@@ -19,6 +19,10 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def is_favorite(self, user):
+        """Check if this item is a favorite for the given user."""
+        return Favorite.objects.filter(user=user, item=self).exists()
 
 
 class Favorite(models.Model):

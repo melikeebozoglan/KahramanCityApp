@@ -69,7 +69,7 @@ export default function Home() {
           <TouchableOpacity
             key={index}  // key prop eklenmeli
             style={styles.item}
-            onPress={() => navigation.navigate('ItemList', {slug: item.slug})}>
+            onPress={() => navigation.navigate('ItemList', {slug: item.slug, name: item.name})}>
             <Text style={styles.category}>{item.name}</Text>
           </TouchableOpacity>
         ))}
