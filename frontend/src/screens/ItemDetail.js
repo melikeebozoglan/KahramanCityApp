@@ -52,10 +52,10 @@ const ItemDetail = ({ route }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       setIsFavorite(true); // Başarılı olursa favori durumunu güncelle
-      Alert.alert('Başarılı', 'Favorilere eklendi!');
+      // Alert.alert('Başarılı', 'Favorilere eklendi!');
     } catch (error) {
       console.error('Error adding to favorites:', error.response?.data || error.message);
-      Alert.alert('Hata', 'Favorilere eklenirken bir hata oluştu.');
+      // Alert.alert('Hata', 'Favorilere eklenirken bir hata oluştu.');
     }
   };
 

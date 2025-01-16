@@ -89,7 +89,10 @@ function Transportation() {
 
               <TouchableOpacity
                 style={styles.titleBox}
-                onPress={() => navigation.navigate("ItemDetail", { item })}
+                onPress={() => navigation.navigate("ItemDetail", { 
+                  image: item.image,
+                  name: item.name,
+                  description: item.description,})}
               >
                 <Icon
                   name="map-marker"

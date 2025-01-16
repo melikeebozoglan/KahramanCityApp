@@ -13,27 +13,31 @@ import Weather from './src/screens/Weather';
 import Favorites from './src/screens/Favorites';
 import Transportation from './src/screens/Transportation';
 import Notification from './src/screens/Notification';
+import './src/i18n';
+import { ThemeProvider } from './src/context/ThemeContext';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name="Login" component={Login}  options={{headerShown: false}}/>
-        <Stack.Screen name="CreateNewAccount" component={CreateNewAccount} options={{headerShown: false}} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
-        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
-        <Stack.Screen name="ItemList" component={ItemList}  options={{headerShown: false}} />
-        <Stack.Screen name="ItemDetail" component={ItemDetail} options={{headerShown: false}} /> 
-        <Stack.Screen name="EditProfile" component={EditProfile} options={{headerShown: true}} />
-        <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
-        <Stack.Screen name="Weather" component={Weather} options={{headerShown: false}} />
-        <Stack.Screen name="Favorites" component={Favorites} options={{headerShown: false}} />
-        <Stack.Screen name="Transportation" component={Transportation} options={{headerShown: false}}/>
-        <Stack.Screen name="Notification" component={Notification} options={{headerShown: false}} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName='Login'>
+          <Stack.Screen name="Login" component={Login}  options={{headerShown: false}}/>
+          <Stack.Screen name="CreateNewAccount" component={CreateNewAccount} options={{headerShown: false}} />
+          <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown: false}} />
+          <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+          <Stack.Screen name="ItemList" component={ItemList}  options={{headerShown: false}} />
+          <Stack.Screen name="ItemDetail" component={ItemDetail} options={{headerShown: false}} /> 
+          <Stack.Screen name="EditProfile" component={EditProfile} options={{headerShown: false}} />
+          <Stack.Screen name="Profile" component={Profile} options={{headerShown: false}} />
+          <Stack.Screen name="Weather" component={Weather} options={{headerShown: false}} />
+          <Stack.Screen name="Favorites" component={Favorites} options={{headerShown: false}} />
+          <Stack.Screen name="Transportation" component={Transportation} options={{headerShown: false}}/>
+          <Stack.Screen name="Notification" component={Notification} options={{headerShown: false}} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
   );
 };
 
